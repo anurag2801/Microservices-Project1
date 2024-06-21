@@ -61,7 +61,7 @@
 				<version>3.3.0</version>
 				<configuration>
 					<container>
-						<mainClass>com.kafka_demo.kafka_demo.kafkaDemoApplication</mainClass>
+						<mainClass>com.kafka_demo.kafka_demo.KafkaDemoApplication</mainClass>
 						<ports>
 							<port>8080</port>
 						</ports>
