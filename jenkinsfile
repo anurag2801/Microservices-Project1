@@ -1,0 +1,60 @@
+node {
+    def remote = [:]
+    remote.name = "node-1"
+    remote.host = "13.234.213.224"    //change as per your ec2 public ip
+    remote.allowAnyHosts = true
+
+
+    stage('AWS & Docker login'){
+
+    withAWS(credentials: 'aws-credential', region: 'ap-south-1') {
+
+         sh "aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/s5w5f4l4"
+
+}
+}
+
+stage('Git Clone ') {
+    git credentialsId: 'git-cred', url: 'git@github.com:anurag2801/jenkin-docker-demo.git', branch: 'main'
+  }
+
+stage('Docker Push') {
+
+   withMaven( maven: 'MAVEN') {
+                sh "mvn -DskipTests clean package jib:build"
+      }
+
+  }
+
+
+
+    stage('Deploy') {
+        withCredentials([sshUserPrivateKey(credentialsId: 'private-key', keyFileVariable: 'identitypk', passphraseVariable: '', usernameVariable: 'userName'),
+        usernamePassword(credentialsId: 'iam-aws-cred', usernameVariable: 'accessKey', passwordVariable: 'secretKey')]) {
+            remote.identityFile = identitypk
+            remote.user = userName
+
+    def awsRegion = 'ap-south-1'
+
+    sshCommand remote: remote, command: """
+            aws configure set aws_access_key_id ${accessKey}
+            aws configure set aws_secret_access_key ${secretKey}
+            aws configure set region ${awsRegion}
+        """
+
+    sshCommand remote: remote,command: "aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/s5w5f4l4 "
+    sshCommand remote: remote,command: "docker stop my-app-container" ,failOnError:false
+    sshCommand remote: remote,command: "docker rm my-app-container",failOnError:false
+    sshCommand remote: remote,command: "docker pull public.ecr.aws/s5w5f4l4/new-project/app:0.0.1-SNAPSHOT "
+    sshCommand remote: remote, command: """
+            docker run -d \
+            --name my-app-container \
+            -p 8080:8080 \
+            public.ecr.aws/s5w5f4l4/new-project/app:0.0.1-SNAPSHOT
+        """
+     //if dir doesnt exists then make dir
+
+
+        }
+    }
+}
