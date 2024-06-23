@@ -1,6 +1,6 @@
 # Project Overview
 
-This project automates the deployment of a basic microservice developed using Spring Boot. The deployment process includes Dockerizing the application using the JIB plugin and automating the entire workflow using Jenkins pipelines.
+This project automates the deployment of a basic microservice developed using Spring Boot. The deployment process includes Dockerizing the application using the JIB plugin because JIB we don't need to wrtie dockerfile and automating the entire workflow using Jenkins pipelines.
 
 ## Technologies Used
 
@@ -56,7 +56,7 @@ The deployment workflow is managed through Jenkins pipelines, ensuring automatio
 
 ## Integration with Existing Infrastructure
 
-In a previous project, we established the foundational AWS infrastructure using Terraform and Ansible. This infrastructure includes EC2 instances with security groups allowing traffic on port 8080 and essential software such as Docker, AWS CLI, and Docker Compose. This setup serves as the deployment environment for our Spring Boot microservices in this project.
+In a previous project, we established the foundational AWS infrastructure using Terraform and Ansible. This infrastructure includes EC2 instances with security groups allowing traffic on port 8080 and essential software such as Docker, AWS CLI, and Docker Compose. This setup serves as the deployment environment for our Spring Boot microservices in this project https://github.com/anurag2801/DevOps-Project1 .
 
 ## Contributors
 
