@@ -58,6 +58,11 @@ The deployment workflow is managed through Jenkins pipelines, ensuring automatio
 
 In a previous project, we established the foundational AWS infrastructure using Terraform and Ansible. This infrastructure includes EC2 instances with security groups allowing traffic on port 8080 and essential software such as Docker, AWS CLI, and Docker Compose. This setup serves as the deployment environment for our Spring Boot microservices in this project https://github.com/anurag2801/DevOps-Project1 .
 
+## Note
+
+This project is still not finished .Later we gonna add actuator to check whether project is running or not . We gonna add new features step by step . 
+Thank you
+
 ## Contributors
 
 - [Anurag Mishra](https://github.com/anurag2801) - Developer
