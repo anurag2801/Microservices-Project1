@@ -36,8 +36,11 @@ jobs:
                 aws configure set aws_secret_access_key ${AWS_S3_SECRET_ACCESS_KEY}
                 aws configure set default.region ap-south-1
                 aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${AWS_ECR_URI}
+                # Stop and remove any existing container
+                docker stop my-container || true
+                docker rm my-container || true
                 docker pull public.ecr.aws/s5w5f4l4/new-project/app:0.0.1-SNAPSHOT
-                docker run -d --name my-conatiner public.ecr.aws/s5w5f4l4/new-project/app:0.0.1-SNAPSHOT 
+                docker run -d --name my-conatiner -p 8080:8080 public.ecr.aws/s5w5f4l4/new-project/app:0.0.1-SNAPSHOT 
                 EOF
              
              
