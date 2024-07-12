@@ -60,6 +60,7 @@ In a previous project, we established the foundational AWS infrastructure using 
 
 ## Note
 
+Try the endpoint http://<ip of the machine>:8080/check after deployment to make sure project is working or not . 
 This project is still not finished .Later we gonna add actuator to check whether project is running or not . We gonna add new features step by step . 
 Thank you
 
