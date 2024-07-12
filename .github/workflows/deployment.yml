@@ -33,13 +33,9 @@ jobs:
                port: ${{ secrets.PORT }}
                envs: AWS_ACCESS_KEY, AWS_SECRET_ACCESS_KEY, AWS_REGION
                script: |
-                    aws --version
-                    echo "$AWS_REGION"
-                    echo "$AWS_ACCESS_KEY"
                     aws configure set aws_access_key_id "$AWS_ACCESS_KEY"
                     aws configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY"
                     aws configure set region "$AWS_REGION"
-                    aws iam get-user
                     aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/s5w5f4l4
                     docker stop my-container || true
                     docker rm my-container || true
