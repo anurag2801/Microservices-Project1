@@ -34,17 +34,16 @@ jobs:
                 echo "$SSH_PRIVATE_KEY" > private_key
                 chmod 600 private_key
                 ssh -i private_key -o StrictHostKeyChecking=no ubuntu@13.232.219.196 
-                aws configure set aws_access_key_id ${AWS_S3_ACCESS_KEY_ID}
-                aws configure set aws_secret_access_key ${AWS_S3_SECRET_ACCESS_KEY}
-                aws configure set region ${AWS_REGION}
-                aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${AWS_ECR_URI}
-                docker stop my-conatiner || true
-                docker rm my-container || true
+                '
+                aws configure set aws_access_key_id ${{ secrets.AWS_S3_ACCESS_KEY_ID }}
+                aws configure set aws_secret_access_key ${{ secrets.AWS_S3_SECRET_ACCESS_KEY }}
+                aws configure set region ${{ secrets.AWS_REGION }}
+                aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/s5w5f4l4
+                docker stop my-app-container || true
+                docker rm my-app-container || true
                 docker pull public.ecr.aws/s5w5f4l4/new-project/app:0.0.1-SNAPSHOT
-                docker run -d \
-                --name my-app-container \
-                 -p 8080:8080 \
-                 public.ecr.aws/s5w5f4l4/new-project/app:0.0.1-SNAPSHOT
+                docker run -d --name my-app-container -p 8080:8080 public.ecr.aws/s5w5f4l4/new-project/app:0.0.1-SNAPSHOT
+                ' 
                
              
              
