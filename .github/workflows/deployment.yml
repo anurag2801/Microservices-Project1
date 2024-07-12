@@ -33,7 +33,11 @@ jobs:
               run: |
                 echo "$SSH_PRIVATE_KEY" > private_key
                 chmod 600 private_key
-                ssh -i private_key -o StrictHostKeyChecking=no ubuntu@13.232.219.196 'aws --version'
+                ssh -i private_key -o StrictHostKeyChecking=no ubuntu@13.232.219.196 
+                '
+                aws --version
+                echo "$AWS_REGION"
+                '
                
              
              
