@@ -29,14 +29,17 @@ jobs:
                username: ${{ secrets.USERNAME }}
                key:  ${{ secrets.PEM_FILE }}
                port: ${{ secrets.PORT }}
-               envs: FOO
+               env: FOO
                script: |
                     whoami
                     ls -al
                     echo "I am $FOO, thanks"
-                    # aws configure set aws_access_key_id $AWS_S3_ACCESS_KEY_ID
-                    # aws configure set aws_secret_access_key $AWS_S3_SECRET_ACCESS_KEY
-                    # aws configure set default.region ap-south-1
+
+
+                    
+              # aws configure set aws_access_key_id $AWS_S3_ACCESS_KEY_ID
+             # aws configure set aws_secret_access_key $AWS_S3_SECRET_ACCESS_KEY
+              # aws configure set default.region ap-south-1
                     
            # - name: SSH and run aws --version
            #   env:
