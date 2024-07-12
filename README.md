@@ -1,6 +1,6 @@
 # Project Overview
 
-This project automates the deployment of a basic microservice developed using Spring Boot. The deployment process includes Dockerizing the application using the JIB plugin because JIB we don't need to wrtie dockerfile and automating the entire workflow using Jenkins pipelines and Github-Actions.Later I also gonna use Gitlab CI/CD pipeline for same project sao you can see whats the difference between these CI/CD tools.
+This project automates the deployment of a basic microservice developed using Spring Boot. The deployment process includes Dockerizing the application using the JIB plugin because JIB we don't need to wrtie dockerfile and automating the entire workflow using Jenkins pipelines and Github-Actions.Later I also gonna use Gitlab CI/CD pipeline for same project so you can see whats the difference between these CI/CD tools.
 
 ## Technologies Used
 
